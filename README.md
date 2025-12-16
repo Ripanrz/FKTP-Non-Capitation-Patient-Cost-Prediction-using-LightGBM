@@ -32,7 +32,7 @@ Berdasarkan proses pengembangan model, berikut adalah tahapan yang dilakukan dal
 ### 3. Modelling (Machine Learning)
 * **Train/Test Split:** Pembagian data latih dan uji.
 * **Algorithm Comparison:** Membandingkan algoritma yang mampu menangani data kategorikal (seperti LightGBM vs XGBoost vs Random Forest).
-* **Model Training:** Pelatihan model menggunakan algoritma terpilih (**LightGBM**) dengan |MAE = 21351.975; RMSE = 84269.14; R2 = 0.851|.
+* **Model Training:** Pelatihan model menggunakan algoritma terpilih (**LightGBM**) dengan |MAE = 21.351,975; RMSE = 84.269,14; R2 = 0,851|.
 * **Evaluation:** Evaluasi performa model dan penyimpanan model terbaik (`final_best_model_LGBMRegressor.pkl`).
 
 ---
