@@ -98,8 +98,4 @@ Ikuti langkah ini untuk menjalankan aplikasi di komputer lokal:
 ---
 
 ## 📂 Struktur Project
-folder_project/
-*├── app.py
-*├── final_best_model_LGBMRegressor.pkl  (File model kamu)
-*└── templates/
-    *└── index.html
+folder_project/ ├── app.py # File utama aplikasi Flask (Backend) ├── model_lgbm_bpjs_2022.pkl # File model LightGBM yang sudah dilatih └── templates/ # Folder untuk file HTML └── index.html # Antarmuka Website (Frontend)
