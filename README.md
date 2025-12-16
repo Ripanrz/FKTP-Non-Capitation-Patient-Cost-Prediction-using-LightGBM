@@ -9,7 +9,7 @@ Project ini bertujuan untuk memprediksi estimasi biaya tagihan kesehatan pasien 
 
 ## 🚀 Demo & Notebook
 
-* **Google Colab Notebook:** [🔗 Klik disini untuk melihat Proses Training Model](MASUKKAN_LINK_GOOGLE_COLAB_KAMU_DISINI)
+* **Google Colab Notebook:** [🔗 Klik disini untuk melihat Proses Training Model](https://colab.research.google.com/drive/1-kYiymfqPgbGhLOl-xuZF4tOX3_0EDMP?usp=sharing)
 * **Dataset:** Data Sampel BPJS Kesehatan Tahun 2022.
 
 ---
@@ -32,8 +32,8 @@ Berdasarkan proses pengembangan model, berikut adalah tahapan yang dilakukan dal
 ### 3. Modelling (Machine Learning)
 * **Train/Test Split:** Pembagian data latih dan uji.
 * **Algorithm Comparison:** Membandingkan algoritma yang mampu menangani data kategorikal (seperti LightGBM vs XGBoost vs Random Forest).
-* **Model Training:** Pelatihan model menggunakan algoritma terpilih (**LightGBM**).
-* **Evaluation:** Evaluasi performa model dan penyimpanan model terbaik (`.pkl`).
+* **Model Training:** Pelatihan model menggunakan algoritma terpilih (**LightGBM**) dengan |MAE = 21351.975; RMSE = 84269.14; R2 = 0.851|.
+* **Evaluation:** Evaluasi performa model dan penyimpanan model terbaik (`final_best_model_LGBMRegressor.pkl`).
 
 ---
 
@@ -43,7 +43,7 @@ Project ini dilengkapi dengan antarmuka web agar user dapat melakukan prediksi d
 
 ### Backend (Python Flask)
 * Dibangun menggunakan framework **Flask**.
-* Melakukan *load* model `.pkl` yang sudah dilatih.
+* Melakukan *load* model `final_best_model_LGBMRegressor.pkl` yang sudah dilatih.
 * Menangani preprocessing input user (konversi tipe data kategorikal) agar sesuai dengan format model LightGBM.
 
 ### Frontend (UI/UX)
@@ -93,8 +93,13 @@ Ikuti langkah ini untuk menjalankan aplikasi di komputer lokal:
     ```
 
 4.  **Buka di Browser**
-    Akses alamat berikut di browser kamu: `http://127.0.0.1:5000`
+    Akses alamat berikut di browser kamu, contoh: `http://127.0.0.1:5000`
 
 ---
 
 ## 📂 Struktur Project
+folder_project/
+├── app.py
+├── final_best_model_LGBMRegressor.pkl  (File model kamu)
+└── templates/
+    └── index.html
