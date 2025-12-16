@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediksi Biaya Pasien BPJS</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
+
+<style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            background-color: #fce7f3; /* Pink sangat muda (Background) */
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .container { 
+            max-width: 900px; 
+            margin-top: 50px; 
+            margin-bottom: 50px; 
+        }
+
+        .card {
+            border: none;
+            border-radius: 20px; /* Sudut membulat biar modern */
+            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.15); /* Bayangan pink halus */
+            overflow: hidden;
+        }
+
+        .card-header { 
+            /* Gradasi Pink ke Ungu (Kekinian banget) */
+            background: linear-gradient(135deg, #ec4899 0%, #d946ef 100%); 
+            color: white; 
+            padding: 25px;
+            border-bottom: none;
+        }
+
+        .card-header h3 {
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 0;
+        }
+
+        .form-label {
+            color: #831843; /* Warna teks label merah maroon gelap */
+            font-size: 0.9rem;
+        }
+
+        .form-control, .form-select {
+            border-radius: 10px;
+            border: 1px solid #fbcfe8;
+            padding: 10px 15px;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #ec4899;
+            box-shadow: 0 0 0 0.25rem rgba(236, 72, 153, 0.25);
+        }
+
+        /* Tombol Prediksi */
+        .btn-predict { 
+            background: linear-gradient(135deg, #be185d 0%, #9d174d 100%);
+            color: white; 
+            font-weight: bold; 
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(190, 24, 93, 0.4);
+        }
+
+        .btn-predict:hover { 
+            transform: translateY(-2px); /* Efek tombol naik dikit pas di hover */
+            box-shadow: 0 6px 20px rgba(190, 24, 93, 0.6);
+            color: white;
+        }
+
+        /* Styling Select2 (Dropdown) biar match sama Pink */
+        .select2-container--bootstrap-5 .select2-selection {
+            border-radius: 10px !important;
+            border-color: #fbcfe8 !important;
+        }
+        .select2-container--bootstrap-5 .select2-selection--single .select2-selection__rendered {
+            color: #333;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+<div class="container">
+    <div class="card shadow">
+        <div class="card-header text-center">
+            <h3>Prediksi Tagihan Pasien FKTP Non-Kapitasi (LGBM)</h3>
+        </div>
+        <div class="card-body">
+            <form action="/predict" method="POST">
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Gender</label>
+                        <select class="form-select" name="gender" required>
+                            {% for opt in options['gender'] %}
+                                <option value="{{ opt }}">{{ opt }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Tingkat Layanan</label>
+                        <select class="form-select" name="tingkat_layanan" required>
+                            {% for opt in options['tingkat_layanan'] %}
+                                <option value="{{ opt }}">{{ opt }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Durasi Rawat (Hari)</label>
+                        <input type="number" class="form-control" name="durasi_rawat" min="0" max="60" step="1" placeholder="Rata-rata: 0.18" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Bobot (Severity)</label>
+                        <input type="number" class="form-control" name="bobot" min="0" step="0.0001" placeholder="Rata-rata: 10.19" required>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Tipe Faskes</label>
+                        <select class="form-select searchable-dropdown" name="tipe_faskes" required>
+                            {% for opt in options['tipe_faskes'] %}
+                                <option value="{{ opt }}">{{ opt }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Provinsi Faskes</label>
+                        <select class="form-select searchable-dropdown" name="prov_faskes" required>
+                            {% for opt in options['provinsi'] %}
+                                <option value="{{ opt }}">{{ opt }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Provinsi Peserta</label>
+                        <select class="form-select searchable-dropdown" name="prov_peserta" required>
+                            {% for opt in options['provinsi'] %}
+                                <option value="{{ opt }}">{{ opt }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label class="form-label fw-bold">Kab/Kota Faskes</label>
+                        <select class="form-select searchable-dropdown" name="kab_kota_faskes" required>
+                            {% for opt in options['kab_kota_faskes'] %}
+                                <option value="{{ opt }}">{{ opt }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-12 mb-3">
+                        <label class="form-label fw-bold">Nama Tindakan</label>
+                        <select class="form-select searchable-dropdown" name="nama_tindakan" required>
+                            {% for opt in options['nama_tindakan'] %}
+                                <option value="{{ opt }}">{{ opt }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="col-12 mb-4">
+                        <label class="form-label fw-bold">Nama Diagnosis (ICD-10)</label>
+                        <select class="form-select searchable-dropdown" name="nama_diagnosis" required>
+                            {% for opt in options['nama_diagnosis'] %}
+                                <option value="{{ opt }}">{{ opt }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn btn-predict w-100 py-2">HITUNG PREDIKSI BIAYA</button>
+            </form>
+
+            {% if prediction_text %}
+            <div class="alert alert-success mt-4 text-center">
+                <h2 class="mb-0">{{ prediction_text }}</h2>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // Mengaktifkan fitur Search pada semua dropdown yang punya class 'searchable-dropdown'
+        $('.searchable-dropdown').select2({
+            theme: 'bootstrap-5',
+            placeholder: "Pilih atau ketik untuk mencari...",
+            allowClear: true
+        });
+    });
+</script>
+
+</body>
+</html>
