@@ -99,7 +99,7 @@ Ikuti langkah ini untuk menjalankan aplikasi di komputer lokal:
 
 ## 📂 Struktur Project
 folder_project/
-├── app.py
-├── final_best_model_LGBMRegressor.pkl  (File model kamu)
-└── templates/
-    └── index.html
+*├── app.py
+*├── final_best_model_LGBMRegressor.pkl  (File model kamu)
+*└── templates/
+    *└── index.html
