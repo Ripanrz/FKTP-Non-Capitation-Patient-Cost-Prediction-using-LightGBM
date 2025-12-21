@@ -8,187 +8,511 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-<style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
 
         body {
-            background-color: #fce7f3; /* Pink sangat muda (Background) */
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 75%, #4facfe 100%);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
             font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
         }
 
-        .container { 
-            max-width: 900px; 
-            margin-top: 50px; 
-            margin-bottom: 50px; 
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
-        .card {
+        .container {
+            max-width: 950px;
+            margin-top: 40px;
+            margin-bottom: 50px;
+        }
+
+        /* Header Section */
+        .header-section {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .header-section h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-section p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+            font-weight: 300;
+        }
+
+        /* Main Card */
+        .main-card {
             border: none;
-            border-radius: 20px; /* Sudut membulat biar modern */
-            box-shadow: 0 10px 25px rgba(236, 72, 153, 0.15); /* Bayangan pink halus */
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.95);
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-bottom: none;
+            position: relative;
             overflow: hidden;
         }
 
-        .card-header { 
-            /* Gradasi Pink ke Ungu (Kekinian banget) */
-            background: linear-gradient(135deg, #ec4899 0%, #d946ef 100%); 
-            color: white; 
-            padding: 25px;
-            border-bottom: none;
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
         }
 
         .card-header h3 {
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+            position: relative;
+            z-index: 1;
+            font-size: 1.8rem;
+        }
+
+        .card-header-subtitle {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .card-body {
+            padding: 40px;
+        }
+
+        /* Form Sections */
+        .form-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.1rem;
             font-weight: 600;
-            letter-spacing: 1px;
-            margin-bottom: 0;
+            color: #667eea;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 4px;
+            height: 20px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
         }
 
         .form-label {
-            color: #831843; /* Warna teks label merah maroon gelap */
-            font-size: 0.9rem;
+            color: #2d3748;
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .form-label-icon {
+            font-size: 0.85rem;
+            color: #667eea;
         }
 
         .form-control, .form-select {
-            border-radius: 10px;
-            border: 1px solid #fbcfe8;
-            padding: 10px 15px;
+            border-radius: 12px;
+            border: 2px solid #e2e8f0;
+            padding: 12px 15px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            background-color: #f7fafc;
+            color: #2d3748;
         }
 
         .form-control:focus, .form-select:focus {
-            border-color: #ec4899;
-            box-shadow: 0 0 0 0.25rem rgba(236, 72, 153, 0.25);
+            border-color: #667eea;
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+            color: #2d3748;
         }
 
-        /* Tombol Prediksi */
-        .btn-predict { 
-            background: linear-gradient(135deg, #be185d 0%, #9d174d 100%);
-            color: white; 
-            font-weight: bold; 
+        .form-control::placeholder {
+            color: #a0aec0;
+            font-weight: 400;
+        }
+
+        /* Number Input Styling */
+        input[type="number"] {
+            padding-right: 40px;
+        }
+
+        /* Button */
+        .btn-predict {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 700;
             border: none;
-            border-radius: 12px;
+            border-radius: 15px;
             font-size: 1.1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(190, 24, 93, 0.4);
+            padding: 16px 30px;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+            margin-top: 10px;
         }
 
-        .btn-predict:hover { 
-            transform: translateY(-2px); /* Efek tombol naik dikit pas di hover */
-            box-shadow: 0 6px 20px rgba(190, 24, 93, 0.6);
+        .btn-predict::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn-predict:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(102, 126, 234, 0.6);
             color: white;
         }
 
-        /* Styling Select2 (Dropdown) biar match sama Pink */
-        .select2-container--bootstrap-5 .select2-selection {
-            border-radius: 10px !important;
-            border-color: #fbcfe8 !important;
+        .btn-predict:hover::before {
+            left: 100%;
         }
+
+        .btn-predict:active {
+            transform: translateY(-1px);
+        }
+
+        /* Select2 Styling */
+        .select2-container--bootstrap-5 .select2-selection {
+            border-radius: 12px !important;
+            border: 2px solid #e2e8f0 !important;
+            padding: 8px 12px !important;
+            font-size: 0.95rem !important;
+        }
+
+        .select2-container--bootstrap-5.select2-container--focus .select2-selection {
+            border-color: #667eea !important;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1) !important;
+        }
+
         .select2-container--bootstrap-5 .select2-selection--single .select2-selection__rendered {
-            color: #333;
+            color: #2d3748 !important;
+            font-weight: 500 !important;
+        }
+
+        .select2-dropdown {
+            border-radius: 12px !important;
+            border: 2px solid #e2e8f0 !important;
+        }
+
+        .select2-results__option--highlighted {
+            background-color: #667eea !important;
+        }
+
+        /* Result Alert */
+        .alert-result {
+            border: none;
+            border-radius: 15px;
+            padding: 30px;
+            margin-top: 30px;
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(34, 197, 94, 0.05) 100%);
+            border-left: 5px solid #22c55e;
+            animation: slideUp 0.6s ease-out;
+        }
+
+        .alert-result h2 {
+            color: #15803d;
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .alert-result-label {
+            color: #059669;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        /* Input Group */
+        .input-group-icon {
+            position: relative;
+        }
+
+        .input-group-icon::after {
+            content: attr(data-icon);
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #a0aec0;
+            font-size: 0.9rem;
+            pointer-events: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-section h1 {
+                font-size: 1.8rem;
+            }
+
+            .card-body {
+                padding: 25px;
+            }
+
+            .card-header {
+                padding: 20px;
+            }
+
+            .card-header h3 {
+                font-size: 1.4rem;
+            }
+        }
+
+        /* Loading State */
+        .btn-predict:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* Divider */
+        .form-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+            margin: 25px 0;
         }
     </style>
 </head>
-<body class="bg-light">
+<body>
 
 <div class="container">
-    <div class="card shadow">
-        <div class="card-header text-center">
-            <h3>Prediksi Tagihan Pasien FKTP Non-Kapitasi (LGBM)</h3>
+    <!-- Header -->
+    <div class="header-section">
+        <div class="header-icon">
+            <i class="fas fa-heartbeat"></i>
         </div>
+        <h1>Smart Health Cost Predictor</h1>
+        <p>Prediksi Tagihan Pasien FKTP Non-Kapitasi dengan Teknologi Machine Learning</p>
+    </div>
+
+    <!-- Main Card -->
+    <div class="card main-card">
+        <!-- Card Header -->
+        <div class="card-header text-center">
+            <h3><i class="fas fa-calculator"></i> Kalkulator Prediksi Biaya</h3>
+            <p class="card-header-subtitle">Masukkan data pasien untuk mendapatkan estimasi biaya rawatan</p>
+        </div>
+
+        <!-- Card Body -->
         <div class="card-body">
             <form action="/predict" method="POST">
                 
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label fw-bold">Gender</label>
-                        <select class="form-select" name="gender" required>
-                            {% for opt in options['gender'] %}
-                                <option value="{{ opt }}">{{ opt }}</option>
-                            {% endfor %}
-                        </select>
+                <!-- Section 1: Data Demografi -->
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-user"></i> Data Demografi Pasien
                     </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <span class="form-label-icon">👤</span> Gender
+                            </label>
+                            <select class="form-select" name="gender" required>
+                                {% for opt in options['gender'] %}
+                                    <option value="{{ opt }}">{{ opt }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
 
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label fw-bold">Tingkat Layanan</label>
-                        <select class="form-select" name="tingkat_layanan" required>
-                            {% for opt in options['tingkat_layanan'] %}
-                                <option value="{{ opt }}">{{ opt }}</option>
-                            {% endfor %}
-                        </select>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <span class="form-label-icon">🏥</span> Tingkat Layanan
+                            </label>
+                            <select class="form-select" name="tingkat_layanan" required>
+                                {% for opt in options['tingkat_layanan'] %}
+                                    <option value="{{ opt }}">{{ opt }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
                     </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label fw-bold">Durasi Rawat (Hari)</label>
-                        <input type="number" class="form-control" name="durasi_rawat" min="0" max="60" step="1" placeholder="Rata-rata: 0.18" required>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label fw-bold">Bobot (Severity)</label>
-                        <input type="number" class="form-control" name="bobot" min="0" step="0.0001" placeholder="Rata-rata: 10.19" required>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label fw-bold">Tipe Faskes</label>
-                        <select class="form-select searchable-dropdown" name="tipe_faskes" required>
-                            {% for opt in options['tipe_faskes'] %}
-                                <option value="{{ opt }}">{{ opt }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label fw-bold">Provinsi Faskes</label>
-                        <select class="form-select searchable-dropdown" name="prov_faskes" required>
-                            {% for opt in options['provinsi'] %}
-                                <option value="{{ opt }}">{{ opt }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label fw-bold">Provinsi Peserta</label>
-                        <select class="form-select searchable-dropdown" name="prov_peserta" required>
-                            {% for opt in options['provinsi'] %}
-                                <option value="{{ opt }}">{{ opt }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label fw-bold">Kab/Kota Faskes</label>
-                        <select class="form-select searchable-dropdown" name="kab_kota_faskes" required>
-                            {% for opt in options['kab_kota_faskes'] %}
-                                <option value="{{ opt }}">{{ opt }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="col-12 mb-3">
-                        <label class="form-label fw-bold">Nama Tindakan</label>
-                        <select class="form-select searchable-dropdown" name="nama_tindakan" required>
-                            {% for opt in options['nama_tindakan'] %}
-                                <option value="{{ opt }}">{{ opt }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
-                    <div class="col-12 mb-4">
-                        <label class="form-label fw-bold">Nama Diagnosis (ICD-10)</label>
-                        <select class="form-select searchable-dropdown" name="nama_diagnosis" required>
-                            {% for opt in options['nama_diagnosis'] %}
-                                <option value="{{ opt }}">{{ opt }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-
                 </div>
 
-                <button type="submit" class="btn btn-predict w-100 py-2">HITUNG PREDIKSI BIAYA</button>
+                <div class="form-divider"></div>
+
+                <!-- Section 2: Data Medis -->
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-stethoscope"></i> Data Medis
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <span class="form-label-icon">📅</span> Durasi Rawat (Hari)
+                            </label>
+                            <input type="number" class="form-control" name="durasi_rawat" min="0" max="60" step="1" placeholder="0 - 60 hari" required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <span class="form-label-icon">⚖️</span> Bobot/Severity
+                            </label>
+                            <input type="number" class="form-control" name="bobot" min="0" step="0.0001" placeholder="Rata-rata: 10.19" required>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <span class="form-label-icon">🔬</span> Nama Diagnosis (ICD-10)
+                            </label>
+                            <select class="form-select searchable-dropdown" name="nama_diagnosis" required>
+                                {% for opt in options['nama_diagnosis'] %}
+                                    <option value="{{ opt }}">{{ opt }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <span class="form-label-icon">💊</span> Nama Tindakan
+                            </label>
+                            <select class="form-select searchable-dropdown" name="nama_tindakan" required>
+                                {% for opt in options['nama_tindakan'] %}
+                                    <option value="{{ opt }}">{{ opt }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-divider"></div>
+
+                <!-- Section 3: Fasilitas & Lokasi -->
+                <div class="form-section">
+                    <div class="section-title">
+                        <i class="fas fa-map-marker-alt"></i> Fasilitas & Lokasi
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <span class="form-label-icon">🏢</span> Tipe Faskes
+                            </label>
+                            <select class="form-select searchable-dropdown" name="tipe_faskes" required>
+                                {% for opt in options['tipe_faskes'] %}
+                                    <option value="{{ opt }}">{{ opt }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <span class="form-label-icon">📍</span> Provinsi Faskes
+                            </label>
+                            <select class="form-select searchable-dropdown" name="prov_faskes" required>
+                                {% for opt in options['provinsi'] %}
+                                    <option value="{{ opt }}">{{ opt }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <span class="form-label-icon">🌍</span> Provinsi Peserta
+                            </label>
+                            <select class="form-select searchable-dropdown" name="prov_peserta" required>
+                                {% for opt in options['provinsi'] %}
+                                    <option value="{{ opt }}">{{ opt }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">
+                                <span class="form-label-icon">🏘️</span> Kab/Kota Faskes
+                            </label>
+                            <select class="form-select searchable-dropdown" name="kab_kota_faskes" required>
+                                {% for opt in options['kab_kota_faskes'] %}
+                                    <option value="{{ opt }}">{{ opt }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-predict w-100 py-3">
+                    <i class="fas fa-magic"></i> HITUNG PREDIKSI BIAYA
+                </button>
             </form>
 
+            <!-- Result Section -->
             {% if prediction_text %}
-            <div class="alert alert-success mt-4 text-center">
-                <h2 class="mb-0">{{ prediction_text }}</h2>
+            <div class="alert alert-result" role="alert">
+                <div class="alert-result-label">💰 Estimasi Biaya Perawatan</div>
+                <h2>{{ prediction_text }}</h2>
             </div>
             {% endif %}
         </div>
@@ -201,11 +525,11 @@
 
 <script>
     $(document).ready(function() {
-        // Mengaktifkan fitur Search pada semua dropdown yang punya class 'searchable-dropdown'
         $('.searchable-dropdown').select2({
             theme: 'bootstrap-5',
             placeholder: "Pilih atau ketik untuk mencari...",
-            allowClear: true
+            allowClear: true,
+            width: '100%'
         });
     });
 </script>
