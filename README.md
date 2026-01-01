@@ -9,8 +9,11 @@ Project ini bertujuan untuk memprediksi estimasi biaya tagihan kesehatan pasien 
 
 ## 🚀 Demo & Notebook
 
-* **Google Colab Notebook:** [🔗 Klik disini untuk melihat Proses Training Model](https://colab.research.google.com/drive/1-kYiymfqPgbGhLOl-xuZF4tOX3_0EDMP?usp=sharing)
+* **Google Colab Notebook:** [🔗 Klik disini untuk melihat Proses Training Model](https://colab.research.google.com/drive/1-kYiymfqPgbGhLOl-xuZF4tOX3_0EDMP?usp=sharing).
 * **Dataset:** Dataset sampel BPJS Kesehatan kasus Tuberkulosis, dengan studi kasus tahun 2022 berbasis data tahun 2021.
+* [🔗 Klik disini untuk melihat Dataset tb_2021_kepesertaan.csv](https://drive.google.com/file/d/1nbd6zlghqanj38iEs_Rs9MBeB2hp298N/view?usp=drive_link).
+* [🔗 Klik disini untuk melihat Dataset tb_fktp_nonkapitasi.csv](https://drive.google.com/file/d/1VjkQyyDTlp3q0EYsqG4fHPlN-v6yGP9I/view?usp=drive_link).
+
 
 ---
 
