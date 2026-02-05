@@ -15,9 +15,8 @@ Project ini bertujuan untuk memprediksi estimasi biaya tagihan kesehatan pasien 
 
 ---
 
-## 🚀 Demo & Notebook
+## 🚀 Dataset
 
-* **Google Colab Notebook:** [🔗 Klik disini untuk melihat Proses Training Model](https://colab.research.google.com/drive/1-kYiymfqPgbGhLOl-xuZF4tOX3_0EDMP?usp=sharing).
 * **Dataset:** Dataset sampel BPJS Kesehatan kasus Tuberkulosis, dengan studi kasus tahun 2022 berbasis data tahun 2021.
 * [🔗 Klik disini untuk melihat Dataset tb_2021_kepesertaan.csv](https://drive.google.com/file/d/1nbd6zlghqanj38iEs_Rs9MBeB2hp298N/view?usp=drive_link).
 * [🔗 Klik disini untuk melihat Dataset tb_fktp_nonkapitasi.csv](https://drive.google.com/file/d/1VjkQyyDTlp3q0EYsqG4fHPlN-v6yGP9I/view?usp=drive_link).
@@ -109,4 +108,20 @@ Ikuti langkah ini untuk menjalankan aplikasi di komputer lokal:
 ---
 
 ## 📂 Struktur Project
-folder_project/ ├── app.py # File utama aplikasi Flask (Backend) ├── model_lgbm_bpjs_2022.pkl # File model LightGBM yang sudah dilatih └── templates/ # Folder untuk file HTML └── index.html # Antarmuka Website (Frontend)
+```text
+folder_project/
+├── app.py                     # Backend: Logic Flask & Load Model
+├── model_lgbm_bpjs_2022.pkl   # Brain: Model Machine Learning (LightGBM)
+└── templates/                 # Frontend: Folder Template HTML
+    └── index.html             # UI: Antarmuka Pengguna
+```
+
+---
+
+## 🔄 Alur Kerja Aplikasi
+```mermaid
+graph LR
+    A[index.html] -- Input Data --> B(app.py)
+    B -- Load Model --> C{model_lgbm_bpjs.pkl}
+    C -- Predict --> B
+    B -- Display Result --> A
