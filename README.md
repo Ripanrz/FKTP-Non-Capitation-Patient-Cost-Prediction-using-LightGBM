@@ -11,7 +11,7 @@ Project ini bertujuan untuk memprediksi estimasi biaya tagihan kesehatan pasien 
 
 ## 📸 Tampilan Antarmuka
 
-![Tampilan Dashboard](FKTP-Non-Capitation-Patient-Cost-Prediction-using-LightGBM/Dashboard-NonKapitasi_FKTP.png)
+![Tampilan Dashboard](Dashboard-NonKapitasi_FKTP.png)
 
 ---
 
