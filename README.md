@@ -7,6 +7,14 @@
 
 Project ini bertujuan untuk memprediksi estimasi biaya tagihan kesehatan pasien BPJS di Fasilitas Kesehatan Tingkat Pertama (FKTP) Non-Kapitasi. Model Machine Learning dibangun menggunakan algoritma **LightGBM (LGBMRegressor)** yang diintegrasikan ke dalam aplikasi web berbasis **Flask**.
 
+---
+
+## 📸 Tampilan Antarmuka
+
+![Tampilan Dashboard](FKTP-Non-Capitation-Patient-Cost-Prediction-using-LightGBM/Dashboard-NonKapitasi_FKTP.png)
+
+---
+
 ## 🚀 Demo & Notebook
 
 * **Google Colab Notebook:** [🔗 Klik disini untuk melihat Proses Training Model](https://colab.research.google.com/drive/1-kYiymfqPgbGhLOl-xuZF4tOX3_0EDMP?usp=sharing).
@@ -80,8 +88,8 @@ Ikuti langkah ini untuk menjalankan aplikasi di komputer lokal:
 
 1.  **Clone Repository**
     ```bash
-    git clone [https://github.com/username-kamu/nama-repo.git](https://github.com/username-kamu/nama-repo.git)
-    cd nama-repo
+    git clone [https://github.com/Ripanrz/FKTP-Non-Capitation-Patient-Cost-Prediction-using-LightGBM.git](https://github.com/Ripanrz/FKTP-Non-Capitation-Patient-Cost-Prediction-using-LightGBM.git)
+    cd FKTP-Non-Capitation-Patient-Cost-Prediction-using-LightGBM
     ```
 
 2.  **Install Dependencies**
