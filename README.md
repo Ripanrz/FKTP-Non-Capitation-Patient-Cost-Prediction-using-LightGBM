@@ -15,6 +15,16 @@ Project ini bertujuan untuk memprediksi estimasi biaya tagihan kesehatan pasien 
 
 ---
 
+## 🔄 Alur Kerja Aplikasi
+```mermaid
+graph LR
+    A[index.html] -- Input Data --> B(app.py)
+    B -- Load Model --> C{final_best_model_LGBMRegressor.pkl}
+    C -- Predict --> B
+    B -- Display Result --> A
+```
+---
+
 ## 🚀 Dataset
 
 * **Dataset:** Dataset sampel BPJS Kesehatan kasus Tuberkulosis, dengan studi kasus tahun 2022 berbasis data tahun 2021.
@@ -115,13 +125,3 @@ folder_project/
 └── templates/                 # Frontend: Folder Template HTML
     └── index.html             # UI: Antarmuka Pengguna
 ```
-
----
-
-## 🔄 Alur Kerja Aplikasi
-```mermaid
-graph LR
-    A[index.html] -- Input Data --> B(app.py)
-    B -- Load Model --> C{model_lgbm_bpjs.pkl}
-    C -- Predict --> B
-    B -- Display Result --> A
